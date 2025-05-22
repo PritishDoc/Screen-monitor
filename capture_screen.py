@@ -1,8 +1,12 @@
-# capture_screen.py
-import pyautogui
-from datetime import datetime
+# Add global state to pause/resume
+PAUSED = False
+
+def toggle_pause():
+    global PAUSED
+    PAUSED = not PAUSED
 
 def capture_screen():
-    image = pyautogui.screenshot()
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    image.save(f'screenshot_{timestamp}.png')
+    if not PAUSED:
+        image = pyautogui.screenshot()
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        image.save(f'screenshots/screenshot_{timestamp}.png')
